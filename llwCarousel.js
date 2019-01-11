@@ -33,7 +33,8 @@
             height: carouselConfig.height,
             width: carouselConfig.width,
             position: "absolute",
-            display: "none"
+            display: "none",
+            zIndex:999
         })
         $carouselPic.eq(0).css("display", "block");
         for (var i = 0; i < carouselConfig.num; i++) {
@@ -49,9 +50,10 @@
             width: carouselConfig.width,
             height: carouselConfig.height * 0.1,
             position: "absolute",
-            bottom: carouselConfig.height * 0.1,
+            bottom: carouselConfig.height * 0.05,
             textAlign: "center",
-            lineHeight: carouselConfig.height * 0.1 + "px"
+            lineHeight: carouselConfig.height * 0.1 + "px",
+            zIndex:99999
         })
         for (var i = 0; i < carouselConfig.num; i++) {
             $("<span/>").appendTo($circles).addClass("circle");

@@ -48,7 +48,7 @@
             top: dropdownConfig.height,
             display: "block"
         });
-        for (i = 1; i < dropdownConfig.number; i++) {
+        for (var i = 1; i < dropdownConfig.number; i++) {
             $menu.append("<p>" + arr[i] + "</p>")
         }
         $menu.find("p").css({

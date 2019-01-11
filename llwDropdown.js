@@ -1,8 +1,8 @@
 ﻿//拥有初始高度、宽度元素绑定  需要传入下拉菜单触发方法，列表名称array
 //字体大小，字体颜色，背景颜色，hover颜色可传可不传
 (function($) {
-    $.fn.ssfDropdwon = function(event, arr, fontSize, color, bgColor, hoverColor) {
-        var dropdwonConfig = {
+    $.fn.llwDropdown = function(event, arr, fontSize, color, bgColor, hoverColor) {
+        var dropdownConfig = {
             number: arr.length,
             height: null,
             width: null,
@@ -11,47 +11,51 @@
             bgColor: "#ccc",
             hoverColor: "#eee"
         }
-        $this = this;
-        $this.text(arr[0]);
-        dropdwonConfig.height = $this.height();
-        dropdwonConfig.width = $this.width();
+        var $this = this;
+        dropdownConfig.height = $this.height();
+        dropdownConfig.width = $this.width();
         if (arguments[2]) {
-            dropdwonConfig.fontSize = fontSize;
+            dropdownConfig.fontSize = fontSize;
         }
         if (arguments[3]) {
-            dropdwonConfig.color = color;
+            dropdownConfig.color = color;
         }
         if (arguments[4]) {
-            dropdwonConfig.bgColor = bgColor;
+            dropdownConfig.bgColor = bgColor;
         }
         if (arguments[5]) {
-            dropdwonConfig.hoverColor = hoverColor;
+            dropdownConfig.hoverColor = hoverColor;
         }
-        $this.css({
+        $("<div/>").appendTo($this).addClass("dropdown");
+        var $dropdown = $this.find(".dropdown");
+        $dropdown.text(arr[0]);
+        $dropdown.css({
             position: "relative",
-            fontSize: dropdwonConfig.fontSize + "px",
-            color: dropdwonConfig.color,
-            lineHeight: dropdwonConfig.height + "px",
+            height: dropdownConfig.height,
+            width: dropdownConfig.width,
+            fontSize: dropdownConfig.fontSize + "px",
+            color: dropdownConfig.color,
+            lineHeight: dropdownConfig.height + "px",
             textAlign: "center",
-            background: dropdwonConfig.bgColor,
+            background: dropdownConfig.bgColor,
             cursor: "pointer",
-	    zIndex:999999
+            zIndex: 999999
         })
-        $("<div/>").appendTo($this).addClass("menu");
+        $("<div/>").appendTo($dropdown).addClass("menu");
         var $menu = $this.find(".menu");
         $menu.css({
             position: "absolute",
-            top: dropdwonConfig.height,
-            display: "none"
+            top: dropdownConfig.height,
+            display: "block"
         });
-        for (i = 1; i < dropdwonConfig.number; i++) {
+        for (i = 1; i < dropdownConfig.number; i++) {
             $menu.append("<p>" + arr[i] + "</p>")
         }
         $menu.find("p").css({
-            height: dropdwonConfig.height,
-            width: dropdwonConfig.width,
+            height: dropdownConfig.height,
+            width: dropdownConfig.width,
             margin: 0,
-            background: dropdwonConfig.bgColor
+            background: dropdownConfig.bgColor
         });
         if (event == "click") {
             $this.click(function() {
@@ -66,10 +70,10 @@
             $menu.stop().slideUp();
         })
         $menu.find("p").mouseover(function() {
-            $(this).css("background", dropdwonConfig.hoverColor);
+            $(this).css("background", dropdownConfig.hoverColor);
         })
         $menu.find("p").mouseleave(function() {
-            $(this).css("background", dropdwonConfig.bgColor);
+            $(this).css("background", dropdownConfig.bgColor);
         })
         $menu.find("p").click(function() {
             alert("点击了" + $(this).text());
